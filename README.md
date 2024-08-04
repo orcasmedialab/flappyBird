@@ -1,8 +1,5 @@
-# flappyBirds
-Simple graphical rendition of the classic mobile game, for the purpose of testing basic ML algorithms
-
 # Flappy Bird Clone
-A simple clone of the classic game **Flappy Bird** using Python and Pygame.
+A simple clone of the classic game **Flappy Bird** using Python and Pygame, for the purpose of testing basic ML algorithms
 
 ## Features
 - **Control**: Press the spacebar to jump.
