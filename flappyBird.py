@@ -72,10 +72,11 @@ class Bird(pygame.sprite.Sprite):
 
         if gameover == False:
             #jump
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+            if (((pygame.mouse.get_pressed()[0] == 1) or (pygame.key.get_pressed()[pygame.K_SPACE] == 1)) 
+                    and self.clicked == False):
                 self.clicked = True
                 self.vel = -8
-            if pygame.mouse.get_pressed()[0] == 0:
+            if ((pygame.mouse.get_pressed()[0] == 0) and (pygame.key.get_pressed()[pygame.K_SPACE] == 0)):
                 self.clicked = False
 
             #handle animation
@@ -128,7 +129,10 @@ class Button():
         #check if mouse is over button
         if self.rect.collidepoint(pos):
             if pygame.mouse.get_pressed()[0] == 1:
-                action = True
+                action = True      
+        # Fix this to allow spacebar reset
+        #while (pygame.key.get_pressed()[pygame.K_SPACE] == 1):
+        #    action = True
 
         #draw button
         screen.blit(self.image, (self.rect.x, self.rect.y))
@@ -211,7 +215,7 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        if (event.type == pygame.MOUSEBUTTONDOWN and flying == False and
+        if ((event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN) and flying == False and
                 gameover == False):
             flying = True
 
