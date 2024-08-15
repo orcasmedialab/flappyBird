@@ -8,4 +8,4 @@ A simple clone of the classic game **Flappy Bird** using Python and Pygame. The 
 - **Game Over**: The game ends upon collision with ground, sky, or pipe.
 
 ## ToDo
-- Add High Score tracking functionality
+- Minor bug where bird sometimes doesn't jump at immediate start

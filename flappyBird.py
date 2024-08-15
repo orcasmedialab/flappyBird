@@ -15,6 +15,7 @@ pygame.display.set_caption('Flappy Bird')
 
 #define font
 font = pygame.font.SysFont('Bauhaus 93', 120)
+font_hs = pygame.font.SysFont('Bauhaus 93', 40)
 
 #define colors
 white = (255, 255, 255)
@@ -27,7 +28,8 @@ gameover = False
 pipe_gap = 150
 pipe_frequency = 1500 #ms
 last_pipe = pygame.time.get_ticks() - pipe_frequency
-score =0
+score = 0
+high_score = 0
 pass_pipe = False
 
 #load images
@@ -180,6 +182,9 @@ while run:
                 pass_pipe = False
 
     draw_text(str(score), font, white, int(screen_width / 2), 50)
+    if high_score > 0:
+            draw_text('High Score: ' + str(high_score), font_hs, white, 20, 20)
+
 
     #check for collision
     if (pygame.sprite.groupcollide(bird_group, pipe_group, False, False) or 
@@ -213,6 +218,8 @@ while run:
     if (gameover == True) and (flying == False):
         if button.draw():
             gameover = False
+            if score > high_score:
+                high_score = score
             score = reset_game()
 
     for event in pygame.event.get():
