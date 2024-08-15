@@ -41,8 +41,12 @@ def draw_text(text, font, text_col, x, y):
 
 def reset_game():
     pipe_group.empty()
+    flappy.index = 0
+    flappy.counter = 0
     flappy.rect.x = 100
     flappy.rect.y = int(screen_height / 2)
+    flappy.vel = 0
+    flappy.image = pygame.transform.rotate(flappy.images[flappy.index], 0)
     score = 0
     return score
 
@@ -72,12 +76,13 @@ class Bird(pygame.sprite.Sprite):
 
         if gameover == False:
             #jump
-            if (((pygame.mouse.get_pressed()[0] == 1) or (pygame.key.get_pressed()[pygame.K_SPACE] == 1)) 
-                    and self.clicked == False):
-                self.clicked = True
-                self.vel = -8
-            if ((pygame.mouse.get_pressed()[0] == 0) and (pygame.key.get_pressed()[pygame.K_SPACE] == 0)):
-                self.clicked = False
+            if flying:
+                if (((pygame.mouse.get_pressed()[0] == 1) or (pygame.key.get_pressed()[pygame.K_SPACE] == 1)) 
+                        and self.clicked == False):
+                    self.clicked = True
+                    self.vel = -8
+                if ((pygame.mouse.get_pressed()[0] == 0) and (pygame.key.get_pressed()[pygame.K_SPACE] == 0)):
+                    self.clicked = False
 
             #handle animation
             self.counter += 1
@@ -158,9 +163,9 @@ while run:
     #draw background
     screen.blit(bg, (0,0))
 
+    pipe_group.draw(screen)
     bird_group.draw(screen)
     bird_group.update()
-    pipe_group.draw(screen)
 
     #render ground
     screen.blit(ground_img, (ground_scroll, 768))
@@ -207,7 +212,7 @@ while run:
         pipe_group.update()
 
     #check for Game Over and reset
-    if gameover == True:
+    if (gameover == True) and (flying == False):
         if button.draw():
             gameover = False
             score = reset_game()

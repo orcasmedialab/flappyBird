@@ -8,9 +8,6 @@ A simple clone of the classic game **Flappy Bird** using Python and Pygame. The 
 - **Game Over**: The game ends upon collision with ground, sky, or pipe.
 
 ## ToDo
-- Fix bug where bird is rotated upon game reset
-- Fix bug where game automatically starts if reset button clicked too quickly
-- Show bird sprite in front of column in case of game over
 - Allow user to reset using spacebar
 - Add High Score tracking functionality
 - Make it so that pipe gaps can generate higher
