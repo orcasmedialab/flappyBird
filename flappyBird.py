@@ -134,12 +134,10 @@ class Button():
         #check if mouse is over button
         if self.rect.collidepoint(pos):
             if pygame.mouse.get_pressed()[0] == 1:
-                action = True      
-        # Fix this to allow spacebar reset
-        #while (pygame.key.get_pressed()[pygame.K_SPACE] == 1):
-        #    action = True
-
-        #draw button
+                action = True
+        if (pygame.key.get_pressed()[pygame.K_SPACE] == 1):
+                action = True
+                
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
         return action
@@ -197,9 +195,9 @@ while run:
         #generate new pipes
         time_now = pygame.time.get_ticks()
         if time_now - last_pipe > pipe_frequency:
-            pipe_height = random.randint(-100, 100)
-            btm_pipe = Pipe(screen_width, int(screen_height / 2) + pipe_height, -1)
-            top_pipe = Pipe(screen_width, int(screen_height / 2) + pipe_height, 1)
+            pipe_height = random.randint(-150, 150)
+            btm_pipe = Pipe(screen_width, int(768 / 2) + pipe_height, -1)
+            top_pipe = Pipe(screen_width, int(768 / 2) + pipe_height, 1)
             pipe_group.add(btm_pipe)
             pipe_group.add(top_pipe)
             last_pipe = time_now
